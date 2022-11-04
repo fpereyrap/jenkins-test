@@ -29,7 +29,7 @@ pipeline {
             stage('Building Docker Image') {
                 steps {
                     script {
-                        def newApp = docker.build registry + ":$BUILD_NUMBER"
+                        def newApp = docker.build registry
                         docker.withRegistry('', registryCredential) {
                         newApp.push()
                         }
