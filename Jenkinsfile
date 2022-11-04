@@ -1,6 +1,6 @@
 pipeline {
     environment {
-    registry = "fpereyra/node-images"
+    registry = "fpereyra/demo"
     registryCredential = 'dockerhub'
     dockerImage = ''
     }
@@ -22,7 +22,6 @@ pipeline {
             stage('validate Dockerfile') {
                 steps {
                     sh 'docker run --rm -i --env HADOLINT_OVERRIDE_WARNING=DL3010 --env HADOLINT_NOFAIL=1 hadolint/hadolint < Dockerfile'
-                    // sh 'docker run --rm -i hadolint/hadolint < Dockerfile'
                 }
             }
             
@@ -33,7 +32,6 @@ pipeline {
                         docker.withRegistry('', registryCredential) {
                         newApp.push()
                         }
-                        // newApp.push()
                     }
                 }
             }
