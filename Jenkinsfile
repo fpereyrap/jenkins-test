@@ -21,8 +21,8 @@ pipeline {
 
             stage('validate Dockerfile') {
                 steps {
-                    // sh 'docker run --rm -i -v ./hadolint.yaml:/.config/hadolint.yaml hadolint/hadolint < Dockerfile'
-                    sh 'docker run --env HADOLINT_OVERRIDE_WARNING=DL3016 -rm -i hadolint/hadolint < Dockerfile'
+                    sh 'docker run --rm -i --env HADOLINT_OVERRIDE_WARNING=DL3010 hadolint/hadolint < Dockerfile'
+                    // sh 'docker run --rm -i hadolint/hadolint < Dockerfile'
                 }
             }
             
