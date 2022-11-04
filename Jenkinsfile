@@ -21,7 +21,8 @@ pipeline {
 
             stage('validate Dockerfile') {
                 steps {
-                    sh 'docker run --rm -i hadolint/hadolint <  --ignore DL3016 Dockerfile'
+                    sh 'docker run --rm -i -v ./hadolint.yaml:/.config/hadolint.yaml hadolint/hadolint < Dockerfile'
+                    // sh 'docker run --rm -i hadolint/hadolint < Dockerfile'
                 }
             }
             
