@@ -21,14 +21,14 @@ pipeline {
 
             stage('validate Dockerfile') {
                 steps {
-                    sh 'docker run --rm -i hadolint/hadolint < Dockerfile'
+                    sh 'docker run --rm -i hadolint/hadolint <  --ignore DL3016 Dockerfile'
                 }
             }
             
             stage('Building Docker Image') {
                 steps {
                     script {
-                        def newApp = docker.build registry
+                        def newApp = docker.build registry + ":$BUILD_NUMBER"
                         docker.withRegistry('', registryCredential) {
                         newApp.push()
                         }
