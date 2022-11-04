@@ -18,6 +18,12 @@ pipeline {
                     sh 'ls -la'
                 }
             }
+
+            stage('validate Dockerfile') {
+                steps {
+                    sh 'docker run --rm -i hadolint/hadolint < Dockerfile'
+                }
+            }
             
             stage('Building Docker Image') {
                 steps {
